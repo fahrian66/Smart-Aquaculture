@@ -2,20 +2,20 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# PENGATURAN
-USE_UNDISTORT = True      # True = gunakan hasil kalibrasi
-                           # False = langsung gunakan gambar asli
+# SETTINGS
+USE_UNDISTORT = True      # True = use camera calibration result
+                           # False = use the original image directly
 
-# MEMBACA GAMBAR
+# READ IMAGE
 gambar_bgr = cv2.imread(
     "WIN_20260109_13_48_33_Pro_jpg.rf.c19f4a5067f321134bd874314979a298.jpg"
 )
 
 if gambar_bgr is None:
-    print("Gambar tidak ditemukan!")
+    print("Image not found!")
     exit()
 
-# UNDISTORT (OPSIONAL)
+# UNDISTORT (OPTIONAL)
 if USE_UNDISTORT:
 
     data = np.load("matriks_kamera_TA.npz")
@@ -43,13 +43,13 @@ if USE_UNDISTORT:
     x, y, w_roi, h_roi = roi
     gambar_bgr = gambar_bgr[y:y+h_roi, x:x+w_roi]
 
-# KONVERSI KE GRAYSCALE
+# CONVERT TO GRAYSCALE
 gambar_gray = cv2.cvtColor(
     gambar_bgr,
     cv2.COLOR_BGR2GRAY
 )
 
-# SEGMENTASI
+# IMAGE SEGMENTATION
 nilai_ambang = 127
 
 _, gambar_segmentasi = cv2.threshold(
@@ -59,26 +59,26 @@ _, gambar_segmentasi = cv2.threshold(
     cv2.THRESH_BINARY
 )
 
-# VISUALISASI
-plt.figure(figsize=(12,6))
+# VISUALIZATION
+plt.figure(figsize=(12, 6))
 
-# Gambar input (asli / undistort)
-plt.subplot(1,2,1)
+# Input image (original / undistorted)
+plt.subplot(1, 2, 1)
 plt.imshow(gambar_gray, cmap='gray', vmin=0, vmax=255)
 
-plt.title("Gambar Asli")
+plt.title("Original Image")
 
 plt.axis("off")
 
-# Segmentasi
-plt.subplot(1,2,2)
+# Segmentation result
+plt.subplot(1, 2, 2)
 plt.imshow(
     gambar_segmentasi,
     cmap="gray",
     vmin=0,
     vmax=255
 )
-plt.title(f"Segmentasi (Threshold = {nilai_ambang})")
+plt.title(f"Segmentation (Threshold = {nilai_ambang})")
 plt.axis("off")
 
 plt.tight_layout()
