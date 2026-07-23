@@ -2,20 +2,20 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# PENGATURAN
-USE_UNDISTORT = True      # True = gunakan hasil kalibrasi
-                          # False = langsung gunakan gambar asli
+# SETTINGS
+USE_UNDISTORT = True      # True = use the camera calibration result
+                          # False = use the original image directly
 
-# MEMBACA GAMBAR
+# READ IMAGE
 gambar_bgr = cv2.imread(
     "WIN_20260109_13_48_33_Pro_jpg.rf.c19f4a5067f321134bd874314979a298.jpg"
 )
 
 if gambar_bgr is None:
-    print("Gambar tidak ditemukan!")
+    print("Image not found!")
     exit()
 
-# UNDISTORT (OPSIONAL)
+# UNDISTORT (OPTIONAL)
 if USE_UNDISTORT:
 
     data = np.load("matriks_kamera_TA.npz")
@@ -43,13 +43,13 @@ if USE_UNDISTORT:
     x, y, w_roi, h_roi = roi
     gambar_bgr = gambar_bgr[y:y+h_roi, x:x+w_roi]
 
-# KONVERSI KE GRAYSCALE
+# CONVERT TO GRAYSCALE
 gambar_gray = cv2.cvtColor(
     gambar_bgr,
     cv2.COLOR_BGR2GRAY
 )
 
-# OTSU THRESHOLDING
+# APPLY OTSU THRESHOLDING
 nilai_otsu, gambar_segmentasi = cv2.threshold(
     gambar_gray,
     0,
@@ -57,9 +57,9 @@ nilai_otsu, gambar_segmentasi = cv2.threshold(
     cv2.THRESH_BINARY + cv2.THRESH_OTSU
 )
 
-print(f"🤖 Komputer otomatis memilih threshold = {nilai_otsu:.0f}")
+print(f"🤖 Automatically selected threshold = {nilai_otsu:.0f}")
 
-# HISTOGRAM
+# COMPUTE HISTOGRAM
 hist = cv2.calcHist(
     [gambar_gray],
     [0],
@@ -68,11 +68,11 @@ hist = cv2.calcHist(
     [0, 256]
 )
 
-# VISUALISASI
-plt.figure(figsize=(15,5))
+# VISUALIZATION
+plt.figure(figsize=(15, 5))
 
-# Gambar Input
-plt.subplot(1,3,1)
+# Input image
+plt.subplot(1, 3, 1)
 
 plt.imshow(
     gambar_gray,
@@ -81,12 +81,12 @@ plt.imshow(
     vmax=255
 )
 
-plt.title("1. Gambar Asli")
+plt.title("1. Original Image")
 
 plt.axis("off")
 
 # Histogram
-plt.subplot(1,3,2)
+plt.subplot(1, 3, 2)
 
 plt.plot(hist, color="gray")
 
@@ -98,14 +98,15 @@ plt.axvline(
     label=f"Otsu = {nilai_otsu:.0f}"
 )
 
-plt.title("2. Histogram & Threshold Otsu")
-plt.xlabel("Intensitas Piksel")
-plt.ylabel("Jumlah Piksel")
-plt.xlim([0,256])
+plt.title("2. Histogram & Otsu Threshold")
+plt.xlabel("Pixel Intensity")
+plt.ylabel("Pixel Count")
+plt.xlim([0, 256])
 plt.grid(alpha=0.3)
 plt.legend()
 
-plt.subplot(1,3,3)
+# Segmentation result
+plt.subplot(1, 3, 3)
 
 plt.imshow(
     gambar_segmentasi,
@@ -114,7 +115,7 @@ plt.imshow(
     vmax=255
 )
 
-plt.title("3. Hasil Segmentasi Otsu")
+plt.title("3. Otsu Segmentation Result")
 plt.axis("off")
 
 plt.tight_layout()
