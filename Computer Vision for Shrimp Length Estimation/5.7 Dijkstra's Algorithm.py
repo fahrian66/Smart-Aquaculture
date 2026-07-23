@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import heapq
 from collections import deque
 
-def load_calibration_data(filepath="camera_matrix_TA.npz"):
+def load_calibration_data(filepath="matriks_kamera.npz"):
     if os.path.exists(filepath):
         data = np.load(filepath)
         return data['mtx'], data['dist']
@@ -222,7 +222,7 @@ class GraphSkeletonAnalyzer:
 if __name__ == "__main__":
     # --- PARAMETER CONFIGURATION ---
     IMAGE_PATH = "shtest.jpg"  # Replace with your photo path
-    CALIBRATION_PATH = "matriks_kamera_TA.npz"
+    CALIBRATION_PATH = "matriks_kamera.npz"
     
     USE_UNDISTORT = True     
     CROP_UNDISTORT = True    
