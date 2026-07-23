@@ -8,7 +8,7 @@ USE_UNDISTORT = True      # True = use camera calibration result
 
 # READ IMAGE
 gambar_bgr = cv2.imread(
-    "WIN_20260109_13_48_33_Pro_jpg.rf.c19f4a5067f321134bd874314979a298.jpg"
+    "shtest.jpg"
 )
 
 if gambar_bgr is None:
@@ -18,7 +18,7 @@ if gambar_bgr is None:
 # UNDISTORT (OPTIONAL)
 if USE_UNDISTORT:
 
-    data = np.load("matriks_kamera_TA.npz")
+    data = np.load("matriks_kamera.npz")
     mtx = data["mtx"]
     dist = data["dist"]
 
