@@ -2,20 +2,20 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# PENGATURAN
-USE_UNDISTORT = True      # True = gunakan hasil kalibrasi
-                          # False = gunakan gambar asli
+# SETTINGS
+USE_UNDISTORT = True      # True = use the camera calibration result
+                          # False = use the original image
 
-# MEMBACA GAMBAR
+# READ IMAGE
 gambar_bgr = cv2.imread(
     "WIN_20260109_13_48_33_Pro_jpg.rf.c19f4a5067f321134bd874314979a298.jpg"
 )
 
 if gambar_bgr is None:
-    print("Gambar tidak ditemukan!")
+    print("Image not found!")
     exit()
 
-# UNDISTORT (OPSIONAL)
+# UNDISTORT (OPTIONAL)
 if USE_UNDISTORT:
 
     data = np.load("matriks_kamera_TA.npz")
@@ -43,13 +43,13 @@ if USE_UNDISTORT:
     x, y, w_roi, h_roi = roi
     gambar_bgr = gambar_bgr[y:y+h_roi, x:x+w_roi]
 
-# KONVERSI KE GRAYSCALE
+# CONVERT TO GRAYSCALE
 gambar_gray = cv2.cvtColor(
     gambar_bgr,
     cv2.COLOR_BGR2GRAY
 )
 
-# SEGMENTASI OTSU
+# APPLY OTSU SEGMENTATION
 _, gambar_biner = cv2.threshold(
     gambar_gray,
     0,
@@ -57,15 +57,15 @@ _, gambar_biner = cv2.threshold(
     cv2.THRESH_BINARY + cv2.THRESH_OTSU
 )
 
-# OPERASI MORFOLOGI
+# MORPHOLOGICAL OPERATIONS
 kernel_close = cv2.getStructuringElement(
     cv2.MORPH_ELLIPSE,
-    (3,3)
+    (3, 3)
 )
 
 kernel_open = cv2.getStructuringElement(
     cv2.MORPH_ELLIPSE,
-    (7,7)
+    (7, 7)
 )
 
 gambar_closing = cv2.morphologyEx(
@@ -80,23 +80,22 @@ gambar_hasil = cv2.morphologyEx(
     kernel_open
 )
 
-# VISUALISASI
-plt.figure(figsize=(15,5))
+# VISUALIZATION
+plt.figure(figsize=(15, 5))
 plt.suptitle(
-    "Tahapan Operasi Morfologi",
+    "Morphological Operation Stages",
     fontsize=16,
     fontweight="bold"
 )
 
-# 1. Grayscale
-plt.subplot(1,3,1)
+# 1. Grayscale image
+plt.subplot(1, 3, 1)
 plt.imshow(gambar_gray, cmap="gray")
 plt.title("1. Grayscale")
 plt.axis("off")
 
-
-# 2. Closing
-plt.subplot(1,3,2)
+# 2. Closing operation
+plt.subplot(1, 3, 2)
 plt.imshow(gambar_closing, cmap="gray")
 plt.title("2. Closing")
 plt.axis("off")
@@ -104,28 +103,28 @@ plt.axis("off")
 plt.text(
     0.5,
     -0.12,
-    "Dilasi → Erosi\nMenutup lubang kecil",
+    "Dilation → Erosion\nFills small holes",
     transform=plt.gca().transAxes,
     ha="center",
     fontsize=9,
     style="italic"
 )
 
-# 3. Opening
-plt.subplot(1,3,3)
+# 3. Opening operation
+plt.subplot(1, 3, 3)
 plt.imshow(gambar_hasil, cmap="gray")
-plt.title("3. Opening (Hasil Akhir)")
+plt.title("3. Opening (Final Result)")
 plt.axis("off")
 
 plt.text(
     0.5,
     -0.12,
-    "Erosi → Dilasi\nMenghilangkan noise",
+    "Erosion → Dilation\nRemoves noise",
     transform=plt.gca().transAxes,
     ha="center",
     fontsize=9,
     style="italic"
 )
 
-plt.tight_layout(rect=[0,0.05,1,0.93])
+plt.tight_layout(rect=[0, 0.05, 1, 0.93])
 plt.show()
