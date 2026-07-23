@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-def load_calibration_data(filepath="matriks_kamera_TA.npz"):
+def load_calibration_data(filepath="matriks_kamera.npz"):
     if os.path.exists(filepath):
         data = np.load(filepath)
         return data['mtx'], data['dist']
@@ -110,8 +110,8 @@ class SkeletonAnalyzerGuoHall:
 
 if __name__ == "__main__":
 
-    IMAGE_PATH = "WIN_20260109_13_48_33_Pro_jpg.rf.c19f4a5067f321134bd874314979a298.jpg"  # Replace with your image path
-    KALIBRASI_PATH = "matriks_kamera_TA.npz"
+    IMAGE_PATH = "shtest.jpg"  # Replace with your image path
+    KALIBRASI_PATH = "matriks_kamera.npz"
 
     USE_UNDISTORT = True      # Set to False if lens correction is not required
     CROP_UNDISTORT = True     # True = crop black borders, False = keep full image
