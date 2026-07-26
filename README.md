@@ -19,7 +19,7 @@ Proyek ini bertujuan untuk mengotomatisasi pengukuran morfometri (panjang tubuh)
 4. [Persyaratan Sistem](#-persyaratan-sistem)
 5. [Struktur Repositori](#-struktur-repositori)
 6. [Penggunaan](#-penggunaan)
-7. [Dataset](#-dataset)
+7. [Dataset](#-[dataset](https://github.com/fahrian66/Smart-Aquaculture/tree/b4e05839f67de75ad825b4de0eeb93735c6d02f6/Dataset))
 8. [Evaluasi & Target Kinerja](#-evaluasi--target-kinerja)
 
 ---
