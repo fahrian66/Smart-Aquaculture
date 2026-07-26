@@ -1,135 +1,70 @@
-# Proyek Implementasi Pengukuran Panjang Udang Vaname
+# 🦐 SMART AQUACULTURE
+**Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence**
 
-Repositori ini merupakan implementasi dari proyek pada buku **Smart Aquaculture: Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence**.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)](https://opencv.org/)
+[![Deep Learning](https://img.shields.io/badge/Deep_Learning-TensorFlow%20%7C%20PyTorch-orange.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)]()
 
-Proyek ini bertujuan membangun sistem pengukuran panjang Udang Vaname secara otomatis menggunakan teknik **Computer Vision** dan **Artificial Intelligence**, kemudian mengevaluasi hasil pengukuran menggunakan metrik MAE, RMSE, dan MAPE.
+Repositori ini berisi implementasi kode dan panduan proyek dari buku **"Smart Aquaculture: Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence"**. 
 
----
-
-## Tujuan
-
-- Mengimplementasikan sistem pengukuran panjang Udang Vaname.
-- Menghasilkan estimasi panjang dalam satuan sentimeter.
-- Mengevaluasi performa sistem menggunakan MAE, RMSE, dan MAPE.
+Proyek ini bertujuan untuk mengotomatisasi pengukuran morfometri (panjang tubuh) Udang Vaname (*Litopenaeus vannamei*) secara non-invasif menggunakan kamera bawah air (underwater camera), teknik *Computer Vision*, dan *Deep Learning*. Sistem ini dirancang untuk menggantikan metode pengukuran manual guna meningkatkan efisiensi, objektivitas, dan akurasi data dalam industri akuakultur (Revolusi Industri 4.0).
 
 ---
 
-## Dataset
-
-Dataset dapat diunduh melalui tautan berikut.
-
-> **Dataset:** *(Tambahkan tautan Google Drive atau GitHub Release di sini)*
-
-Struktur dataset:
-
-```
-dataset/
-│
-├── images/
-│   ├── image001.jpg
-│   ├── image002.jpg
-│   └── ...
-│
-├── labels/
-│   └── ground_truth.csv
-│
-└── README.md
-```
+## 📑 Daftar Isi
+1. [Latar Belakang](#-latar-belakang)
+2. [Fitur Utama](#-fitur-utama)
+3. [Metode Pengukuran](#-metode-pengukuran)
+4. [Persyaratan Sistem](#-persyaratan-sistem)
+5. [Instalasi](#-instalasi)
+6. [Struktur Repositori](#-struktur-repositori)
+7. [Penggunaan](#-penggunaan)
+8. [Dataset](#-dataset)
+9. [Evaluasi & Target Kinerja](#-evaluasi--target-kinerja)
+10. [Referensi](#-referensi)
 
 ---
 
-## Metode
-
-Silakan memilih salah satu metode berikut.
-
-- Object Detection + Skeletonization
-- Object Detection + Minimum Bounding Rectangle
-- Instance Segmentation + Skeletonization
-- Instance Segmentation + Longest Pixel Distance
+## 🌊 Latar Belakang
+Pengukuran panjang udang secara manual membutuhkan waktu lama, rentan terhadap bias operator, dan dapat memicu stres pada udang. Dengan integrasi *Computer Vision* dan model *Deep Learning* seperti **VGG16**, sistem ini mampu memproses citra udang secara otomatis, memisahkan objek dari latar belakang, menangani distorsi visual di dalam air (seperti kekeruhan dan hamburan cahaya), serta mengestimasi panjang tubuh dari rostrum hingga telson dalam satuan sentimeter (cm).
 
 ---
 
-## Instalasi
+## ✨ Fitur Utama
+* **Kalibrasi Kamera Bawah Air:** Perbaikan distorsi lensa (Radial & Tangensial) dan konversi satuan piksel ke sentimeter (cm).
+* **Peningkatan Kualitas Citra (Image Enhancement):** Implementasi CLAHE, *White Balance*, dan *Dehazing* untuk mengatasi kekeruhan air dan pencahayaan yang tidak merata.
+* **Filter Noise:** Penggunaan *Mean*, *Median*, dan *Gaussian Filter* untuk menangani *Gaussian, Speckle,* dan *Salt & Pepper Noise*.
+* **Segmentasi Otomatis:** Pemisahan objek menggunakan metode *Otsu Thresholding*, *Semantic Segmentation*, dan *Instance Segmentation*.
+* **Ekstraksi Centerline (Skeletonisasi):** Penerapan algoritma *Guo-Hall Thinning* dan penemuan jalur utama (panjang udang) menggunakan **Teori Graf** dan **Algoritma Dijkstra**.
+* **Deep Learning Regresi:** *Transfer Learning* dan *Fine-Tuning* menggunakan arsitektur **VGG16** dengan *Regression Layer* untuk estimasi ukuran kontinu.
 
-Clone repository
+---
 
+## 🔬 Metode Pengukuran
+Proyek ini mengimplementasikan beberapa pendekatan pengukuran yang dapat dipilih sesuai kebutuhan:
+1. **Pendekatan Skeletonisasi Dasar:** Segmentasi (Otsu/Morfologi) $\rightarrow$ Skeletonisasi Guo-Hall $\rightarrow$ Dijkstra $\rightarrow$ Estimasi Panjang.
+2. **Instance Segmentation + Skeletonisasi:** Deteksi individu udang secara presisi $\rightarrow$ Pembentukan Biner Mask $\rightarrow$ Skeletonisasi $\rightarrow$ Estimasi Panjang.
+3. **Deteksi Objek + Minimum Bounding Rectangle (MBBox):** Deteksi Bounding Box (YOLO/SSD) $\rightarrow$ Ekstraksi Kontur $\rightarrow$ Pembentukan MBBox miring (Rotated) $\rightarrow$ Perhitungan Mayor Axis.
+4. **VGG16 Regression Pipeline:** Input Citra Udang $\rightarrow$ Ekstraksi Fitur Konvolusi (VGG16 Backbone) $\rightarrow$ Fully Connected Layer $\rightarrow$ Linear Output (Panjang Aktual).
+
+---
+
+## 💻 Persyaratan Sistem
+Pastikan sistem Anda telah terinstal library berikut:
+* Python 3.8+
+* OpenCV (`cv2`)
+* NumPy (`numpy`)
+* Matplotlib (`matplotlib`)
+* TensorFlow / Keras (untuk arsitektur VGG16)
+* Scikit-Learn (untuk evaluasi regresi)
+* *Disarankan menggunakan GPU dengan CUDA yang aktif untuk mempercepat proses training.*
+
+---
+
+## 🛠️ Instalasi
+1. Clone repositori ini ke komputer lokal Anda:
+   
 ```bash
-git clone https://github.com/username/nama-repository.git
-```
-
-Masuk ke folder
-
-```bash
-cd nama-repository
-```
-
-Install library
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Menjalankan Program
-
-Contoh menjalankan program
-
-```bash
-python main.py
-```
-
-atau
-
-```bash
-python predict.py
-```
-
----
-
-## Output
-
-Program diharapkan menghasilkan:
-
-- Hasil deteksi atau segmentasi
-- Hasil pengukuran panjang
-- Tabel hasil estimasi
-- Nilai MAE
-- Nilai RMSE
-- Nilai MAPE
-
----
-
-## Target Evaluasi
-
-Implementasi dianggap berhasil apabila memenuhi target berikut.
-
-| Parameter | Target |
-|-----------|--------|
-| MAE | ≤ 0.50 cm |
-| RMSE | ≤ 0.60 cm |
-| MAPE | ≤ 5% |
-
----
-
-## Struktur Repository
-
-```
-project/
-│
-├── dataset/
-├── models/
-├── results/
-├── src/
-├── requirements.txt
-├── main.py
-└── README.md
-```
-
----
-
-## Referensi
-
-Ryan A.
-
-**Smart Aquaculture: Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence**
+   git clone [https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git](https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git)
+   cd SMART-AQUACULTURE-Shrimp-Measurement
