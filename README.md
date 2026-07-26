@@ -62,9 +62,6 @@ Pastikan sistem Anda telah terinstal library berikut:
 
 ---
 
-## 🛠️ Instalasi
-1. Clone repositori ini ke komputer lokal Anda:
-   
-```bash
+
    git clone [https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git](https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git)
    cd SMART-AQUACULTURE-Shrimp-Measurement
