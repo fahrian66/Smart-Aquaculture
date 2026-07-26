@@ -21,7 +21,6 @@ Proyek ini bertujuan untuk mengotomatisasi pengukuran morfometri (panjang tubuh)
 6. [Penggunaan](#-penggunaan)
 7. [Dataset](#-dataset)
 8. [Evaluasi & Target Kinerja](#-evaluasi--target-kinerja)
-9. [Referensi](#-referensi)
 
 ---
 
