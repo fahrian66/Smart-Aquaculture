@@ -1,303 +1,135 @@
-<div align="center">
+# Proyek Implementasi Pengukuran Panjang Udang Vaname
 
-# 🦐 Smart Aquaculture
-## Automatic Vannamei Shrimp Length Measurement Using Camera and Artificial Intelligence
+Repositori ini merupakan implementasi dari proyek pada buku **Smart Aquaculture: Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence**.
 
-<img src="images/banner.png" width="900">
-
-**Official source code and learning materials accompanying the book**
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)]
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)]
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red.svg)]
-[![YOLO](https://img.shields.io/badge/YOLO-11-orange.svg)]
-[![License](https://img.shields.io/badge/License-MIT-success.svg)]
-
-</div>
+Proyek ini bertujuan membangun sistem pengukuran panjang Udang Vaname secara otomatis menggunakan teknik **Computer Vision** dan **Artificial Intelligence**, kemudian mengevaluasi hasil pengukuran menggunakan metrik MAE, RMSE, dan MAPE.
 
 ---
 
-# 📖 About
+## Tujuan
 
-This repository contains all source code, examples, datasets, and implementation materials for the book:
-
-> **Smart Aquaculture: Automatic Vannamei Shrimp Length Measurement Using Camera and Artificial Intelligence**
-
-The repository demonstrates how **Computer Vision**, **Deep Learning**, and **Image Processing** can be integrated to automatically estimate the body length of Vannamei shrimp from underwater images.
+- Mengimplementasikan sistem pengukuran panjang Udang Vaname.
+- Menghasilkan estimasi panjang dalam satuan sentimeter.
+- Mengevaluasi performa sistem menggunakan MAE, RMSE, dan MAPE.
 
 ---
 
-# 🎯 Project Workflow
+## Dataset
 
-```text
-Camera
-   │
-   ▼
-YOLO11 Object Detection
-   │
-   ▼
-Crop ROI
-   │
-   ▼
-Grayscale
-   │
-   ▼
-Otsu Threshold
-   │
-   ▼
-Morphology
-   │
-   ▼
-Skeletonization
-   │
-   ▼
-Graph Construction
-   │
-   ▼
-Dijkstra Algorithm
-   │
-   ▼
-Length Measurement
-```
+Dataset dapat diunduh melalui tautan berikut.
 
----
+> **Dataset:** *(Tambahkan tautan Google Drive atau GitHub Release di sini)*
 
-# 📸 Project Preview
-
-## System Overview
-
-> **(Place System Architecture Image Here)**
+Struktur dataset:
 
 ```
-images/system_architecture.png
-```
-
----
-
-## Image Processing Pipeline
-
-> **(Place Processing Pipeline Image Here)**
-
-```
-images/pipeline.png
-```
-
----
-
-## GUI
-
-> **(Place GUI Screenshot Here)**
-
-```
-images/gui.png
-```
-
----
-
-# 📂 Repository Structure
-
-```
-Smart-Aquaculture/
+dataset/
 │
-├── 📁 Computer Vision untuk Pengukuran Udang
+├── images/
+│   ├── image001.jpg
+│   ├── image002.jpg
+│   └── ...
 │
-├── 📁 Deep Learning untuk Pengukuran Udang
+├── labels/
+│   └── ground_truth.csv
 │
-├── 📁 Implementasi Sistem Pengukuran Otomatis
-│
-├── 📁 images
-│
-├── README.md
-│
-└── LICENSE
+└── README.md
 ```
 
 ---
 
-# 📚 Documentation
+## Metode
 
-## 📁 1. Computer Vision untuk Pengukuran Udang
+Silakan memilih salah satu metode berikut.
 
-This folder contains all Computer Vision algorithms used for shrimp length measurement.
-
-Contents include:
-
-- Image Processing
-- Image Enhancement
-- Thresholding
-- Morphological Operations
-- Skeletonization
-- Graph Theory
-- Dijkstra Algorithm
-- Pixel-to-Centimeter Conversion
-- Shrimp Length Measurement
+- Object Detection + Skeletonization
+- Object Detection + Minimum Bounding Rectangle
+- Instance Segmentation + Skeletonization
+- Instance Segmentation + Longest Pixel Distance
 
 ---
 
-## 🤖 2. Deep Learning untuk Pengukuran Udang
+## Instalasi
 
-This folder contains Deep Learning implementation.
-
-Topics include:
-
-- CNN
-- Object Detection
-- One-Stage Detector
-- Two-Stage Detector
-- Transfer Learning
-- VGG16
-- Fine Tuning
-- Regression Layer
-- Dataset Preparation
-- Model Training
-- Validation
-- Overfitting
-- Loss Function
-
----
-
-## ⚙️ 3. Implementasi Sistem Pengukuran Otomatis
-
-Complete implementation of the automatic shrimp measurement system.
-
-Including:
-
-- Camera Integration
-- Image Acquisition
-- AI Model Integration
-- Automatic Preprocessing
-- Automatic Length Measurement
-- GUI
-- Real-Time Monitoring
-
----
-
-# 💻 Technologies
-
-- Python
-- OpenCV
-- PyTorch
-- Ultralytics YOLO11
-- NumPy
-- Matplotlib
-
----
-
-# 📖 Learning Path
-
-```
-Digital Image
-      │
-      ▼
-Computer Vision
-      │
-      ▼
-Deep Learning
-      │
-      ▼
-Object Detection
-      │
-      ▼
-Shrimp Segmentation
-      │
-      ▼
-Skeletonization
-      │
-      ▼
-Graph + Dijkstra
-      │
-      ▼
-Length Measurement
-```
-
----
-
-# 📸 Example Results
-
-## Original Image
-
-> *(Insert Image)*
-
----
-
-## Object Detection
-
-> *(Insert Image)*
-
----
-
-## Binary Image
-
-> *(Insert Image)*
-
----
-
-## Skeleton
-
-> *(Insert Image)*
-
----
-
-## Final Measurement
-
-> *(Insert Image)*
-
----
-
-# 🚀 Getting Started
-
-Clone this repository
+Clone repository
 
 ```bash
-git clone https://github.com/yourusername/Smart-Aquaculture.git
+git clone https://github.com/username/nama-repository.git
 ```
 
-Install dependencies
+Masuk ke folder
+
+```bash
+cd nama-repository
+```
+
+Install library
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run example
+---
+
+## Menjalankan Program
+
+Contoh menjalankan program
 
 ```bash
 python main.py
 ```
 
----
+atau
 
-# 📘 Book
-
-This repository accompanies the book
-
-**Smart Aquaculture**
-**Automatic Vannamei Shrimp Length Measurement Using Camera and Artificial Intelligence**
+```bash
+python predict.py
+```
 
 ---
 
-# 🤝 Contributing
+## Output
 
-Contributions are welcome!
+Program diharapkan menghasilkan:
 
-Feel free to submit:
-
-- Bug fixes
-- Improvements
-- New algorithms
-- Documentation
-
----
-
-# ⭐ Support
-
-If you find this repository useful, please consider giving it a ⭐.
-
-It helps more people discover this project.
+- Hasil deteksi atau segmentasi
+- Hasil pengukuran panjang
+- Tabel hasil estimasi
+- Nilai MAE
+- Nilai RMSE
+- Nilai MAPE
 
 ---
 
-<div align="center">
+## Target Evaluasi
 
-Made with ❤️ for Smart Aquaculture
+Implementasi dianggap berhasil apabila memenuhi target berikut.
 
-</div>
+| Parameter | Target |
+|-----------|--------|
+| MAE | ≤ 0.50 cm |
+| RMSE | ≤ 0.60 cm |
+| MAPE | ≤ 5% |
+
+---
+
+## Struktur Repository
+
+```
+project/
+│
+├── dataset/
+├── models/
+├── results/
+├── src/
+├── requirements.txt
+├── main.py
+└── README.md
+```
+
+---
+
+## Referensi
+
+Ryan A.
+
+**Smart Aquaculture: Implementasi Pengukuran Panjang Udang Vaname Menggunakan Kamera dan Artificial Intelligence**
