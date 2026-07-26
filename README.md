@@ -17,12 +17,10 @@ Proyek ini bertujuan untuk mengotomatisasi pengukuran morfometri (panjang tubuh)
 2. [Fitur Utama](#-fitur-utama)
 3. [Metode Pengukuran](#-metode-pengukuran)
 4. [Persyaratan Sistem](#-persyaratan-sistem)
-5. [Instalasi](#-instalasi)
-6. [Struktur Repositori](#-struktur-repositori)
-7. [Penggunaan](#-penggunaan)
-8. [Dataset](#-dataset)
-9. [Evaluasi & Target Kinerja](#-evaluasi--target-kinerja)
-10. [Referensi](#-referensi)
+5. [Struktur Repositori](#-struktur-repositori)
+6. [Penggunaan](#-penggunaan)
+7. [Dataset](#️-dataset)
+8. [Evaluasi & Target Kinerja](#-evaluasi--target-kinerja)
 
 ---
 
@@ -62,9 +60,15 @@ Pastikan sistem Anda telah terinstal library berikut:
 
 ---
 
-## 🛠️ Instalasi
-1. Clone repositori ini ke komputer lokal Anda:
-   
-```bash
-   git clone [https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git](https://github.com/username/SMART-AQUACULTURE-Shrimp-Measurement.git)
-   cd SMART-AQUACULTURE-Shrimp-Measurement
+## 📂 Struktur Repositori
+```text
+├── Dataset/                 # Dataset citra mentah & ground truth
+├── src/
+│   ├── preprocessing/       # Modul Enhancement (CLAHE, Dehazing, dll)
+│   ├── calibration/         # Skrip Kalibrasi kamera
+│   ├── cv_measurement/      # Segmentasi, Guo-Hall Thinning, & Dijkstra
+│   └── dl_models/           # VGG16 Regresi, Object Detection
+├── notebooks/               # Jupyter Notebooks untuk eksperimen
+├── weights/                 # Folder untuk model pre-trained
+├── requirements.txt         # Daftar dependencies
+└── README.md                # Dokumentasi utama proyek
