@@ -68,7 +68,5 @@ Pastikan sistem Anda telah terinstal library berikut:
 │   ├── calibration/         # Skrip Kalibrasi kamera
 │   ├── cv_measurement/      # Segmentasi, Guo-Hall Thinning, & Dijkstra
 │   └── dl_models/           # VGG16 Regresi, Object Detection
-├── notebooks/               # Jupyter Notebooks untuk eksperimen
-├── weights/                 # Folder untuk model pre-trained
 ├── requirements.txt         # Daftar dependencies
 └── README.md                # Dokumentasi utama proyek
