@@ -66,7 +66,6 @@ Pastikan sistem Anda telah terinstal library berikut:
 ├── src/
 │   ├── preprocessing/       # Modul Enhancement (CLAHE, Dehazing, dll)
 │   ├── calibration/         # Skrip Kalibrasi kamera
-│   ├── cv_measurement/      # Segmentasi, Guo-Hall Thinning, & Dijkstra
-│   └── dl_models/           # VGG16 Regresi, Object Detection
+│   └── cv_measurement/      # Segmentasi, Guo-Hall Thinning, & Dijkstra
 ├── requirements.txt         # Daftar dependencies
 └── README.md                # Dokumentasi utama proyek
